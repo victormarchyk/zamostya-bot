@@ -1,0 +1,121 @@
+#!/usr/bin/env node
+
+/**
+ * Module dependencies.
+ */
+
+var app = require('../app');
+var debug = require('debug')('untitled1:server');
+var http = require('http');
+
+/**
+ * Get port from environment and store in Express.
+ */
+
+var port = normalizePort(process.env.PORT || '3000');
+app.set('port', port);
+
+/**
+ * Create HTTP server.
+ */
+
+var server = http.createServer(app);
+
+/**
+ * Listen on provided port, on all network interfaces.
+ */
+
+server.listen(port);
+server.on('error', onError);
+server.on('listening', onListening);
+
+/**
+ * Normalize a port into a number, string, or false.
+ */
+
+function normalizePort(val) {
+  var port = parseInt(val, 10);
+
+  if (isNaN(port)) {
+    // named pipe
+    return val;
+  }
+
+  if (port >= 0) {
+    // port number
+    return port;
+  }
+
+  return false;
+}
+
+/**
+ * Event listener for HTTP server "error" event.
+ */
+
+function onError(error) {
+  if (error.syscall !== 'listen') {
+    throw error;
+  }
+
+  var bind = typeof port === 'string'
+    ? 'Pipe ' + port
+    : 'Port ' + port;
+
+  // handle specific listen errors with friendly messages
+  switch (error.code) {
+    case 'EACCES':
+      console.error(bind + ' requires elevated privileges');
+      process.exit(1);
+      break;
+    case 'EADDRINUSE':
+      console.error(bind + ' is already in use');
+      process.exit(1);
+      break;
+    default:
+      throw error;
+  }
+}
+
+/**
+ * Event listener for HTTP server "listening" event.
+ */
+
+function onListening() {
+  var addr = server.address();
+  var bind = typeof addr === 'string'
+    ? 'pipe ' + addr
+    : 'port ' + addr.port;
+
+  const TelegramBot = require('node-telegram-bot-api');
+
+// replace the value below with the Telegram token you receive from @BotFather
+  const token = '1985101001:AAHIGY1pHdOyx-mkKB5Qk3HuZG97CY39OGQ';
+
+// Create a bot that uses 'polling' to fetch new updates
+  const bot = new TelegramBot(token, {polling: true});
+
+  bot.onText(/.*/ ,(msg, match) => {
+    // 'msg' is the received Message from Telegram
+    // 'match' is the result of executing the regexp above on the text content
+    // of the message
+
+    const chatId = msg.chat.id;
+
+
+    if (msg.from.username === "V1tya5") {
+      const resp = ["Соси носки", "Ти лох чи да?", "Лекай бебу", "Їбай городами", "Пішов нахуй", "Сапай капусту",
+        "Сиси хуя", "Барсіку соси", "Сідай на коліна сосати хуй"]; // the captured "whatever"
+      bot.sendMessage(chatId, resp[Math.floor(Math.random()*resp.length)]);
+    } else if (msg.from.first_name === "Безбах" || msg.from.last_name === "Безбах" ||
+         msg.from.last_name === "Bezbakh") {
+      const resp = ["Безбах - Віддай грошей"]; // the captured "whatever"
+      bot.sendMessage(chatId, resp[Math.floor(Math.random()*resp.length)]);
+    }
+    // send back the matched "whatever" to the chat
+
+  });
+  debug('Listening on ' + bind);
+}
+
+
