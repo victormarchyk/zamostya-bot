@@ -116,10 +116,10 @@ function onListening() {
       const resp = ["Клює?", "рав 4 збс ?", "а хто батерею розпиздячив?" , "Та...Іра...,туда-сюда. Не можу... ",
         "Ахік заїбав", "я їбу як цю трансляцію кидати ", "Главний красава", "ладно,я піду поригаю"]; // the captured "whatever"
       bot.sendMessage(chatId, `@${msg.from.username} ${resp[Math.floor(Math.random()*resp.length)]}`);
-    } else if (msg.from.first_name.toLowerCase() === "line") {
+    } else if (msg.from.id === 491672660) {
       const resp = ["ауді хуйня", "Ну короче я поїхав", "Хочу їбатись", "V8 Блядь", "Менше 80 по зарванцям не їду",
                     "поміняв масла", "Шашлик хуйня, поджелудка болить"]; // the captured "whatever"
-      bot.sendMessage(chatId, `@${msg.from.username} ${resp[Math.floor(Math.random()*resp.length)]}`);
+      bot.sendMessage(chatId, `${resp[Math.floor(Math.random()*resp.length)]}`);
     }
     // send back the matched "whatever" to the chat
 
