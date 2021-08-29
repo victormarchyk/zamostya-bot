@@ -100,21 +100,26 @@ function onListening() {
     // 'match' is the result of executing the regexp above on the text content
     // of the message
 
+    console.log(JSON.stringify(msg));
     const chatId = msg.chat.id;
 
 
     if (msg.from.username === "V1tya5") {
       const resp = ["Соси носки", "Ти лох чи да?", "Лекай бебу", "Їбай городами", "Пішов нахуй", "Сапай капусту",
-        "Сиси хуя", "Барсіку соси", "Сідай на коліна сосати хуй"]; // the captured "whatever"
-      bot.sendMessage(chatId, resp[Math.floor(Math.random()*resp.length)]);
-    } else if (msg.from.first_name === "Безбах" || msg.from.last_name === "Безбах" ||
-         msg.from.last_name === "Bezbakh") {
+        "Соси хуя", "Барсіку соси", "Сідай на коліна сосати хуй"]; // the captured "whatever"
+      bot.sendMessage(chatId, `@${msg.from.username} ${resp[Math.floor(Math.random()*resp.length)]}`);
+    } else if (msg.from.first_name.toLowerCase() === "безбах" || msg.from.last_name.toLowerCase() === "безбах" ||
+         msg.from.last_name.toLowerCase() === "bezbakh" || msg.from.first_name.toLowerCase() === "bezbakh" ) {
       const resp = ["Безбах - Віддай грошей"]; // the captured "whatever"
-      bot.sendMessage(chatId, resp[Math.floor(Math.random()*resp.length)]);
+      bot.sendMessage(chatId, `@${msg.from.username} ${resp[Math.floor(Math.random()*resp.length)]}`);
+    } else if (msg.from.username === "dmytro_hurba") {
+      const resp = ["Клює?", "рав 4 збс ?", "а хто батерею розпиздячив?" , "Та...Іра...,туда-сюда. Не можу... ",
+        "Ахік заїбав", "я їбу як цю трансляцію кидати ", "Главний красава", "ладно,я піду поригаю"]; // the captured "whatever"
+      bot.sendMessage(chatId, `@${msg.from.username} ${resp[Math.floor(Math.random()*resp.length)]}`);
     }
     // send back the matched "whatever" to the chat
 
-  });
+  })
   debug('Listening on ' + bind);
 }
 
